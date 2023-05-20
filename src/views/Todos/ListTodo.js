@@ -2,6 +2,8 @@ import React from "react";
 import { toast } from "react-toastify";
 import AddTodo from "./AddTodo";
 import "./ListTodo.scss";
+import logo from "../logo.svg";
+
 class ListTodo extends React.Component {
   state = {
     listTodos: [
@@ -29,15 +31,21 @@ class ListTodo extends React.Component {
     let { editTodo, listTodos } = this.state;
     let isEmtyObj = Object.keys(editTodo).length === 0;
     //save
-    if (isEmtyObj === false && editTodo && editTodo.id === todo.id) {
-      let listTodosCopy = [...listTodos];
-      let objIndex = listTodos.findIndex((item) => item.id === todo.id);
-      listTodosCopy[objIndex].title = editTodo.title;
+    if (isEmtyObj === false && editTodo.id === todo.id) {
+      if (editTodo.title !== todo.title) {
+        let listTodosCopy = [...listTodos];
+        let objIndex = listTodos.findIndex((item) => item.id === todo.id);
+        listTodosCopy[objIndex].title = editTodo.title;
+        this.setState({
+          listTodos: listTodosCopy,
+          editTodo: {},
+        });
+        toast.success("Edit successfully");
+        return;
+      }
       this.setState({
-        listTodos: listTodosCopy,
         editTodo: {},
       });
-      toast.success("Edit successfully");
       return;
     }
     //edit
@@ -50,18 +58,12 @@ class ListTodo extends React.Component {
     });
   };
 
-  handleSaveTodo = () => {
-    this.setState({
-      listTodos: [...this.state.listTodos],
-      editTodo: {},
-    });
-  };
-
   render() {
     const { listTodos, editTodo } = this.state;
     let isEmtyObj = Object.keys(editTodo).length === 0;
     return (
       <div className="list-todo-container">
+        <img src={logo} className="App-logo" alt="logo" />
         <AddTodo addNewTodo={this.addNewTodo} />
         <div className="list-todo-content">
           {listTodos &&
