@@ -6,6 +6,8 @@ import Nav from "./Nav/Nav";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Example/Home";
 import About from "./Example/About";
+import ListUser from "./Users/ListUser";
+
 function App() {
   return (
     <div className="App">
@@ -15,6 +17,7 @@ function App() {
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/todo" element={<ListTodo />}></Route>
           <Route path="/about" element={<About />}></Route>
+          <Route path="/user" element={<ListUser />}></Route>
         </Routes>
       </header>
       <ToastContainer
