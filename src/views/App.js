@@ -3,7 +3,7 @@ import ListTodo from "./Todos/ListTodo";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Nav from "./Nav/Nav";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Example/Home";
 import About from "./Example/About";
 function App() {
@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Nav />
-        <Switch>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/todo" component={ListTodo}></Route>
-          <Route path="/about" component={About}></Route>
-        </Switch>
+        <Routes>
+          <Route path="/" exact element={<Home />}></Route>
+          <Route path="/todo" element={<ListTodo />}></Route>
+          <Route path="/about" element={<About />}></Route>
+        </Routes>
       </header>
       <ToastContainer
         position="top-right"
